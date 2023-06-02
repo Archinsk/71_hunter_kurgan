@@ -10,6 +10,11 @@ const routes = [
     name: "home",
     component: HomeView,
   },
+  {
+    path: "/settings",
+    name: "SettingsView",
+    component: () => import("../views/SettingsView"),
+  },
 ];
 
 const router = new VueRouter({

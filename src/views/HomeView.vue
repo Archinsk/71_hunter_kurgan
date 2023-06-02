@@ -7,42 +7,17 @@
             <div class="logo-container">
               <img class="logo-container__image" src="images/logo.png" />
             </div>
-            <div class="form-group form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="standartCheck"
-              />
-              <label class="form-check-label" for="standartCheck"
-                >Check me out</label
-              >
-            </div>
-            <div class="custom-control custom-checkbox">
-              <input
-                type="checkbox"
-                class="custom-control-input"
-                id="customCheck"
-              />
-              <label class="custom-control-label" for="customCheck"
-                >Check me out</label
-              >
-            </div>
-
             <h4 class="color-gray font-weight-bold">
               Департамент гражданской защиты, охраны окружающей среды и
               природных ресурсов Курганской области
             </h4>
-
             <hr />
-
             <h4 class="color-gray">
               Автоматизированная система приема заявок на участие в
               распределении разрешений на добычу охотничьих ресурсов Курганской
               области
             </h4>
-
             <h5 class="color-gray py-33 m-0">Полезная информация:</h5>
-
             <ul class="list-unstyled py-33 pt-0 m-0">
               <li>
                 <a
@@ -53,7 +28,6 @@
                   Официальный сайт департамента
                 </a>
               </li>
-
               <li>
                 <a
                   class="font-weight-light"
@@ -68,46 +42,36 @@
 
             <div class="row justify-content-md-center">
               <div class="col-12 col-md-10 col-lg-8 col-xl-6">
-                <!--                <a-->
-                <!--                  class="w-100 btn btn-primary btn-lg scroll-to-request"-->
-                <!--                  href="#"-->
-                <!--                  role="button"-->
-                <!--                  style=""-->
+                <!--                <CollapseButton-->
+                <!--                  target-id="huntingAppCollapse"-->
+                <!--                  class="btn-primary btn-block btn-lg"-->
+                <!--                  @click="selectAccordionItem('huntingAppCollapse')"-->
                 <!--                >-->
-                <!--                  Подать заявку на добычу охотничьих ресурсов-->
-                <!--                </a>-->
-                <CollapseButton
-                  target-id="huntingAppCollapse"
-                  class="btn-primary btn-block btn-lg"
-                  @click="selectAccordionItem('huntingAppCollapse')"
-                >
-                  <div class="collapse-title">
-                    Подать заявку на добычу охотничьих ресурсов
-                  </div>
-                </CollapseButton>
+                <!--                  <div class="collapse-title">-->
+                <!--                    Подать заявку на добычу охотничьих ресурсов-->
+                <!--                  </div>-->
+                <!--                </CollapseButton>-->
+                <button class="btn btn-primary btn-block btn-lg">
+                  Подать заявку на добычу охотничьих ресурсов
+                </button>
               </div>
             </div>
             <div class="my-2 row justify-content-md-center">
               <div class="col-12 col-md-10 col-lg-8 col-xl-6">
-                <!--                <a-->
-                <!--                  class="w-100 btn btn-primary btn-lg scroll-to-notification"-->
-                <!--                  href="#"-->
-                <!--                  role="button"-->
-                <!--                  style=""-->
+                <!--                <CollapseButton-->
+                <!--                  target-id="preserveAppCollapse"-->
+                <!--                  class="btn-primary btn-block btn-lg"-->
+                <!--                  @click="selectAccordionItem('preserveAppCollapse')"-->
                 <!--                >-->
-                <!--                  Подать уведомление об участии в мероприятиях по сохранению-->
-                <!--                  охотничьих ресурсов-->
-                <!--                </a>-->
-                <CollapseButton
-                  target-id="preserveAppCollapse"
-                  class="btn-primary btn-block btn-lg"
-                  @click="selectAccordionItem('preserveAppCollapse')"
-                >
-                  <div class="collapse-title">
-                    Подать уведомление об участии в мероприятиях по сохранению
-                    охотничьих ресурсов
-                  </div>
-                </CollapseButton>
+                <!--                  <div class="collapse-title">-->
+                <!--                    Подать уведомление об участии в мероприятиях по сохранению-->
+                <!--                    охотничьих ресурсов-->
+                <!--                  </div>-->
+                <!--                </CollapseButton>-->
+                <button class="btn btn-primary btn-block btn-lg">
+                  Подать уведомление об участии в мероприятиях по сохранению
+                  охотничьих ресурсов
+                </button>
               </div>
             </div>
 
@@ -119,13 +83,7 @@
                 Рабочее время: пн-пт, 9:00-18:00. Обед 13:00-14:00
               </li>
             </ul>
-
             <ul class="list-unstyled pt-3 m-0">
-              <!-- <li>
-                  <a class="text-underline font-weight-light" href="/files/Параметры охоты.pdf" target="_blank">
-                      Параметры охоты
-                  </a>
-              </li> -->
               <li>
                 <a
                   class="font-weight-light"
@@ -136,7 +94,6 @@
                 </a>
               </li>
             </ul>
-
             <div class="py-3">
               <h5 class="m-0 color-gray font-weight-bold">
                 Прием заявок осуществляется с 1 марта 2023 г.
@@ -150,41 +107,34 @@
               <div
                 class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3 mt-2"
               >
-                <!--                <a-->
-                <!--                  class="w-100 btn btn-primary btn-lg scroll-to-status"-->
-                <!--                  href="#"-->
-                <!--                  role="button"-->
-                <!--                  >Узнать статус заявки</a-->
+                <!--                <CollapseButton-->
+                <!--                  target-id="checkAppCollapse"-->
+                <!--                  class="btn-primary btn-block btn-lg"-->
+                <!--                  @click="selectAccordionItem('checkAppCollapse')"-->
                 <!--                >-->
-                <CollapseButton
-                  target-id="checkAppCollapse"
-                  class="btn-primary btn-block btn-lg"
-                  @click="selectAccordionItem('checkAppCollapse')"
-                >
-                  <div class="collapse-title">Узнать статус заявки</div>
-                </CollapseButton>
+                <!--                  <div class="collapse-title">Узнать статус заявки</div>-->
+                <!--                </CollapseButton>-->
+                <button class="btn btn-primary btn-block btn-lg">
+                  Узнать статус заявки
+                </button>
               </div>
-
               <div
                 class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3 my-2"
               >
-                <!--                <a-->
-                <!--                  class="w-100 btn btn-primary btn-lg scroll-to-notif-status"-->
-                <!--                  href="#"-->
-                <!--                  role="button"-->
-                <!--                  >Проверить статус уведомления</a-->
+                <!--                <CollapseButton-->
+                <!--                  target-id="checkNotificationCollapse"-->
+                <!--                  class="btn-primary btn-block btn-lg"-->
+                <!--                  @click="selectAccordionItem('checkNotificationCollapse')"-->
                 <!--                >-->
-                <CollapseButton
-                  target-id="checkNotificationCollapse"
-                  class="btn-primary btn-block btn-lg"
-                  @click="selectAccordionItem('checkNotificationCollapse')"
-                >
-                  <div class="collapse-title">Проверить статус уведомления</div>
-                </CollapseButton>
+                <!--                  <div class="collapse-title">Проверить статус уведомления</div>-->
+                <!--                </CollapseButton>-->
+                <button class="btn btn-primary btn-block btn-lg">
+                  Проверить статус уведомления
+                </button>
               </div>
             </div>
           </div>
-          <div
+          <!-- <div
             v-if="selectedAccordionItemId"
             class="accordion"
             id="huntingFormsAccordion"
@@ -192,7 +142,7 @@
             <div class="card-list row">
               <div class="col-12">
                 <Card class="shadow-sm my-4">
-                  <temnpplate v-slot:card-body>
+                  <template v-slot:card-body>
                     <Collapse
                       id="huntingAppCollapse"
                       parent-id="huntingFormsAccordion"
@@ -229,11 +179,11 @@
                         <Form :form-data="checkNotificationForm" />
                       </div>
                     </Collapse>
-                  </temnpplate>
+                  </template>
                 </Card>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -243,17 +193,17 @@
 
 <script>
 import TheFooter from "../components/TheFooter";
-import Collapse from "../components/universal/BS46Collapse";
+/*import Collapse from "../components/universal/BS46Collapse";
 import CollapseButton from "../components/universal/BS46CollapseButton";
 import Card from "../components/universal/BS46Card";
-import Form from "../components/universal/BS46Form";
+import Form from "../components/universal/BS46Form";*/
 export default {
   name: "HomeView",
   components: {
-    Form,
+    /*Form,
     Card,
     CollapseButton,
-    Collapse,
+    Collapse,*/
     TheFooter,
   },
   data() {
@@ -1639,56 +1589,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.custom-control {
-  padding-left: 1.25rem !important;
-
-  #customCheck {
-    & ~ .custom-control-label {
-      &::before {
-        position: absolute;
-        top: 0.3rem;
-        left: -1.25rem;
-        display: block;
-        width: 0.8125rem;
-        height: 0.8125rem;
-        pointer-events: none;
-        content: "";
-        background-color: #fff;
-        border: 1px solid #767676;
-        border-radius: 0.1875rem;
-        box-shadow: none;
-        transition: background-color 0.15s ease-in-out,
-          border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-      }
-
-      &::after {
-        position: absolute;
-        top: 0.25rem;
-        left: -1.25rem;
-        display: block;
-        width: 0.8125rem;
-        height: 0.8125rem;
-        content: "";
-        background: 42% 68%/70% 70% no-repeat;
-      }
-    }
-
-    &:checked {
-      & ~ .custom-control-label {
-        color: greenyellow;
-
-        &::before {
-          background-color: red;
-          border-color: red;
-        }
-
-        &::after {
-          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e");
-        }
-      }
-    }
-  }
-}
-</style>

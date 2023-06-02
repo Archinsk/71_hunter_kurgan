@@ -10,11 +10,6 @@
       <li class="list-inline-item">Телефон приёмной: 43-19-00</li>
       <li class="list-inline-item">Телефон канцелярии: 41-37-07</li>
     </ul>
-
-    <div class="mt-4">
-      Разработка и поддержка
-      <a href="https://nethammer.ru" target="_blank">Nethammer</a>
-    </div>
   </footer>
 </template>
 
