@@ -3,6 +3,8 @@
     <router-view
       :config="config"
       :settings-form="settingsForm"
+      :measure="measure"
+      :app-form="appForm"
       @change-settings-form-part1="
         changeFormWithValidate(
           settingsForm.notification.form,
@@ -26,6 +28,8 @@
         )
       "
       @set-config="setConfig"
+      @get-start-form="getForm($event)"
+      @form-action="invokeAction($event)"
     />
   </div>
 </template>
@@ -688,6 +692,1034 @@ export default {
           },
         },
       },
+      measure: {},
+      appForm: {
+        active: false,
+        data: {},
+        form: {
+          actions: [],
+          id: 0,
+          modelId: 0,
+          scheme: {},
+        },
+        id: 0,
+        orderId: "",
+        status: "",
+        loader: {
+          isLoading: false,
+          isResponse: false,
+          comment: "",
+        },
+      },
+
+      form01: {
+        id: 213,
+        modelId: 311,
+        orderId: "0",
+        status: "",
+        data: {
+          params_handler_application: "",
+          params_handler_application_start: "",
+          params_handler_state_string: "",
+          lastName: "",
+          firstName: "",
+          middleName: "",
+          dateOfBirth: "",
+          textField2: "",
+          textField3: "",
+          regAdress: "",
+          faktAdress: "",
+          checkbox1: false,
+          documentType: "Паспорт",
+          passportSeries: "",
+          passportNumber: "",
+          passportDate: "",
+          passportCode: "",
+          passportOrganization: "",
+          textField1: "",
+          snils: "",
+          organizationNameSelect: {},
+          innOrg: "",
+          textField4: "",
+          textField6: "",
+          educationSelect: {},
+          educationYear: "",
+          scientificDegreeSelect: {},
+          degreeYear: "",
+          scientificTitleSelect: {},
+          titleYear: "",
+          publications: [],
+          konkursi: [],
+          nauchKol: [],
+          scienceWorkName: "",
+          direction: "",
+          annotation: "",
+          relevance: "",
+          newness1: "",
+          newness2: "",
+          newness3: "",
+          newness: "",
+          rashifrovka1: "",
+          rashifrovka2: "",
+          rashifrovka3: "",
+          rashifrovka4: "",
+          rashifrovka5: "",
+          rashifrovka6: "",
+          rashifrovka7: "",
+          submit1: false,
+          file: [],
+          file1: [],
+          file3: [],
+          file2: [],
+          file6: [],
+          file4: [],
+          file8: [],
+          checkbox8: false,
+          checkbox4: false,
+          checkbox5: false,
+          checkbox6: false,
+          checkbox: false,
+          checkbox3: false,
+          checkbox2: false,
+          checkbox7: false,
+          impactFaktorSum: 0,
+        },
+        form: {
+          id: 529,
+          name: "Заявление (черновик)",
+          scheme: {
+            components: [
+              {
+                extTypeCheckbox: false,
+                components: [
+                  {
+                    extTypeCheckbox: false,
+                    input: false,
+                    columns: [
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            input: true,
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            tableView: true,
+                            smev_req: {},
+                            disabled: true,
+                            label: "Номер",
+                            type: "textfield",
+                            key: "params_handler_application",
+                            esiaKey: {},
+                          },
+                        ],
+                        offset: 0,
+                        size: "md",
+                        width: 4,
+                        push: 0,
+                      },
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            enableMaxDateInput: false,
+                            widget: {
+                              minDate: null,
+                              enableTime: false,
+                              format: "dd.MM.yyyy",
+                              displayInTimezone: "viewer",
+                              noCalendar: false,
+                              type: "calendar",
+                              locale: "ru",
+                              time_24hr: true,
+                              allowInput: true,
+                              minuteIncrement: 1,
+                              mode: "single",
+                              useLocaleSettings: false,
+                              maxDate: null,
+                              disableWeekdays: false,
+                              disableWeekends: false,
+                              hourIncrement: 1,
+                            },
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            format: "dd.MM.yyyy",
+                            enableTime: false,
+                            tableView: false,
+                            datePicker: {
+                              disableWeekdays: false,
+                              disableWeekends: false,
+                            },
+                            label: "Дата создания",
+                            type: "datetime",
+                            enableMinDateInput: false,
+                            input: true,
+                            timePicker: {
+                              showMeridian: false,
+                            },
+                            smev_req: {},
+                            disabled: true,
+                            placeholder: "ДД.ММ.ГГГГ",
+                            key: "params_handler_application_start",
+                            esiaKey: {},
+                          },
+                        ],
+                        size: "md",
+                        offset: 0,
+                        width: 4,
+                        push: 0,
+                      },
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            input: true,
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            tableView: true,
+                            smev_req: {},
+                            disabled: true,
+                            label: "Статус",
+                            type: "textfield",
+                            key: "params_handler_state_string",
+                            esiaKey: {},
+                          },
+                        ],
+                        offset: 0,
+                        size: "md",
+                        width: 4,
+                        push: 0,
+                      },
+                    ],
+                    dataGridLabel: false,
+                    smev_req: {},
+                    tableView: false,
+                    label: "Столбцы",
+                    type: "columns",
+                    key: "columns1",
+                    esiaKey: {},
+                  },
+                ],
+                collapsed: false,
+                dataGridLabel: false,
+                allowPrevious: false,
+                tableView: false,
+                label: "Бизнес-процесс №1",
+                title: "Бизнес-процесс №1",
+                type: "panel",
+                breadcrumbClickable: true,
+                collapsible: false,
+                buttonSettings: {
+                  cancel: true,
+                  next: true,
+                  previous: true,
+                },
+                input: false,
+                smev_req: {},
+                key: "panel",
+                esiaKey: {},
+              },
+            ],
+          },
+          modelId: 311,
+          actions: [
+            {
+              id: 732,
+              name: "Вернуться в реестр",
+              modelId: 311,
+              formId: 529,
+              hidden: false,
+              alwaysActive: false,
+              notRequiredAction: true,
+              backAction: true,
+              printAction: false,
+              signAction: false,
+            },
+            {
+              id: 731,
+              name: "Сохранить",
+              modelId: 311,
+              formId: 529,
+              hidden: false,
+              alwaysActive: false,
+              notRequiredAction: true,
+              backAction: false,
+              printAction: false,
+              signAction: false,
+            },
+          ],
+        },
+        type: 1,
+        startDate: "2023-06-05T07:59:31.618+00:00",
+        endDate: null,
+        active: true,
+        archive: false,
+        metadata: {},
+      },
+      form02: {
+        id: 213,
+        modelId: 311,
+        orderId: "0",
+        status: "",
+        data: {
+          params_handler_application: "",
+          params_handler_application_start: "",
+          params_handler_state_string: "",
+          lastName: "",
+          firstName: "",
+          middleName: "",
+          dateOfBirth: "",
+          textField2: "",
+          textField3: "",
+          regAdress: "",
+          faktAdress: "",
+          checkbox1: false,
+          documentType: "Паспорт",
+          passportSeries: "",
+          passportNumber: "",
+          passportDate: "",
+          passportCode: "",
+          passportOrganization: "",
+          textField1: "",
+          snils: "",
+          organizationNameSelect: {},
+          innOrg: "",
+          textField4: "",
+          textField6: "",
+          educationSelect: {},
+          educationYear: "",
+          scientificDegreeSelect: {},
+          degreeYear: "",
+          scientificTitleSelect: {},
+          titleYear: "",
+          publications: [],
+          konkursi: [],
+          nauchKol: [],
+          scienceWorkName: "",
+          direction: "",
+          annotation: "",
+          relevance: "",
+          newness1: "",
+          newness2: "",
+          newness3: "",
+          newness: "",
+          rashifrovka1: "",
+          rashifrovka2: "",
+          rashifrovka3: "",
+          rashifrovka4: "",
+          rashifrovka5: "",
+          rashifrovka6: "",
+          rashifrovka7: "",
+          submit1: false,
+          file: [],
+          file1: [],
+          file3: [],
+          file2: [],
+          file6: [],
+          file4: [],
+          file8: [],
+          checkbox8: false,
+          checkbox4: false,
+          checkbox5: false,
+          checkbox6: false,
+          checkbox: false,
+          checkbox3: false,
+          checkbox2: false,
+          checkbox7: false,
+          impactFaktorSum: 0,
+        },
+        form: {
+          id: 529,
+          name: "Заявление (черновик)",
+          scheme: {
+            components: [
+              {
+                extTypeCheckbox: false,
+                components: [
+                  {
+                    extTypeCheckbox: false,
+                    input: false,
+                    columns: [
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            input: true,
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            tableView: true,
+                            smev_req: {},
+                            disabled: true,
+                            label: "Номер",
+                            type: "textfield",
+                            key: "params_handler_application",
+                            esiaKey: {},
+                          },
+                        ],
+                        offset: 0,
+                        size: "md",
+                        width: 4,
+                        push: 0,
+                      },
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            enableMaxDateInput: false,
+                            widget: {
+                              minDate: null,
+                              enableTime: false,
+                              format: "dd.MM.yyyy",
+                              displayInTimezone: "viewer",
+                              noCalendar: false,
+                              type: "calendar",
+                              locale: "ru",
+                              time_24hr: true,
+                              allowInput: true,
+                              minuteIncrement: 1,
+                              mode: "single",
+                              useLocaleSettings: false,
+                              maxDate: null,
+                              disableWeekdays: false,
+                              disableWeekends: false,
+                              hourIncrement: 1,
+                            },
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            format: "dd.MM.yyyy",
+                            enableTime: false,
+                            tableView: false,
+                            datePicker: {
+                              disableWeekdays: false,
+                              disableWeekends: false,
+                            },
+                            label: "Дата создания",
+                            type: "datetime",
+                            enableMinDateInput: false,
+                            input: true,
+                            timePicker: {
+                              showMeridian: false,
+                            },
+                            smev_req: {},
+                            disabled: true,
+                            placeholder: "ДД.ММ.ГГГГ",
+                            key: "params_handler_application_start",
+                            esiaKey: {},
+                          },
+                        ],
+                        size: "md",
+                        offset: 0,
+                        width: 4,
+                        push: 0,
+                      },
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            input: true,
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            tableView: true,
+                            smev_req: {},
+                            disabled: true,
+                            label: "Статус",
+                            type: "textfield",
+                            key: "params_handler_state_string",
+                            esiaKey: {},
+                          },
+                        ],
+                        offset: 0,
+                        size: "md",
+                        width: 4,
+                        push: 0,
+                      },
+                    ],
+                    dataGridLabel: false,
+                    smev_req: {},
+                    tableView: false,
+                    label: "Столбцы",
+                    type: "columns",
+                    key: "columns1",
+                    esiaKey: {},
+                  },
+                ],
+                collapsed: false,
+                dataGridLabel: false,
+                allowPrevious: false,
+                tableView: false,
+                label: "Бизнес-процесс №2",
+                title: "Бизнес-процесс №2",
+                type: "panel",
+                breadcrumbClickable: true,
+                collapsible: false,
+                buttonSettings: {
+                  cancel: true,
+                  next: true,
+                  previous: true,
+                },
+                input: false,
+                smev_req: {},
+                key: "panel",
+                esiaKey: {},
+              },
+            ],
+          },
+          modelId: 311,
+          actions: [
+            {
+              id: 732,
+              name: "Вернуться в реестр",
+              modelId: 311,
+              formId: 529,
+              hidden: false,
+              alwaysActive: false,
+              notRequiredAction: true,
+              backAction: true,
+              printAction: false,
+              signAction: false,
+            },
+            {
+              id: 731,
+              name: "Сохранить",
+              modelId: 311,
+              formId: 529,
+              hidden: false,
+              alwaysActive: false,
+              notRequiredAction: true,
+              backAction: false,
+              printAction: false,
+              signAction: false,
+            },
+          ],
+        },
+        type: 1,
+        startDate: "2023-06-05T07:59:31.618+00:00",
+        endDate: null,
+        active: true,
+        archive: false,
+        metadata: {},
+      },
+      form03: {
+        id: 213,
+        modelId: 311,
+        orderId: "0",
+        status: "",
+        data: {
+          params_handler_application: "",
+          params_handler_application_start: "",
+          params_handler_state_string: "",
+          lastName: "",
+          firstName: "",
+          middleName: "",
+          dateOfBirth: "",
+          textField2: "",
+          textField3: "",
+          regAdress: "",
+          faktAdress: "",
+          checkbox1: false,
+          documentType: "Паспорт",
+          passportSeries: "",
+          passportNumber: "",
+          passportDate: "",
+          passportCode: "",
+          passportOrganization: "",
+          textField1: "",
+          snils: "",
+          organizationNameSelect: {},
+          innOrg: "",
+          textField4: "",
+          textField6: "",
+          educationSelect: {},
+          educationYear: "",
+          scientificDegreeSelect: {},
+          degreeYear: "",
+          scientificTitleSelect: {},
+          titleYear: "",
+          publications: [],
+          konkursi: [],
+          nauchKol: [],
+          scienceWorkName: "",
+          direction: "",
+          annotation: "",
+          relevance: "",
+          newness1: "",
+          newness2: "",
+          newness3: "",
+          newness: "",
+          rashifrovka1: "",
+          rashifrovka2: "",
+          rashifrovka3: "",
+          rashifrovka4: "",
+          rashifrovka5: "",
+          rashifrovka6: "",
+          rashifrovka7: "",
+          submit1: false,
+          file: [],
+          file1: [],
+          file3: [],
+          file2: [],
+          file6: [],
+          file4: [],
+          file8: [],
+          checkbox8: false,
+          checkbox4: false,
+          checkbox5: false,
+          checkbox6: false,
+          checkbox: false,
+          checkbox3: false,
+          checkbox2: false,
+          checkbox7: false,
+          impactFaktorSum: 0,
+        },
+        form: {
+          id: 529,
+          name: "Заявление (черновик)",
+          scheme: {
+            components: [
+              {
+                extTypeCheckbox: false,
+                components: [
+                  {
+                    extTypeCheckbox: false,
+                    input: false,
+                    columns: [
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            input: true,
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            tableView: true,
+                            smev_req: {},
+                            disabled: true,
+                            label: "Номер",
+                            type: "textfield",
+                            key: "params_handler_application",
+                            esiaKey: {},
+                          },
+                        ],
+                        offset: 0,
+                        size: "md",
+                        width: 4,
+                        push: 0,
+                      },
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            enableMaxDateInput: false,
+                            widget: {
+                              minDate: null,
+                              enableTime: false,
+                              format: "dd.MM.yyyy",
+                              displayInTimezone: "viewer",
+                              noCalendar: false,
+                              type: "calendar",
+                              locale: "ru",
+                              time_24hr: true,
+                              allowInput: true,
+                              minuteIncrement: 1,
+                              mode: "single",
+                              useLocaleSettings: false,
+                              maxDate: null,
+                              disableWeekdays: false,
+                              disableWeekends: false,
+                              hourIncrement: 1,
+                            },
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            format: "dd.MM.yyyy",
+                            enableTime: false,
+                            tableView: false,
+                            datePicker: {
+                              disableWeekdays: false,
+                              disableWeekends: false,
+                            },
+                            label: "Дата создания",
+                            type: "datetime",
+                            enableMinDateInput: false,
+                            input: true,
+                            timePicker: {
+                              showMeridian: false,
+                            },
+                            smev_req: {},
+                            disabled: true,
+                            placeholder: "ДД.ММ.ГГГГ",
+                            key: "params_handler_application_start",
+                            esiaKey: {},
+                          },
+                        ],
+                        size: "md",
+                        offset: 0,
+                        width: 4,
+                        push: 0,
+                      },
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            input: true,
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            tableView: true,
+                            smev_req: {},
+                            disabled: true,
+                            label: "Статус",
+                            type: "textfield",
+                            key: "params_handler_state_string",
+                            esiaKey: {},
+                          },
+                        ],
+                        offset: 0,
+                        size: "md",
+                        width: 4,
+                        push: 0,
+                      },
+                    ],
+                    dataGridLabel: false,
+                    smev_req: {},
+                    tableView: false,
+                    label: "Столбцы",
+                    type: "columns",
+                    key: "columns1",
+                    esiaKey: {},
+                  },
+                ],
+                collapsed: false,
+                dataGridLabel: false,
+                allowPrevious: false,
+                tableView: false,
+                label: "Бизнес-процесс №3",
+                title: "Бизнес-процесс №3",
+                type: "panel",
+                breadcrumbClickable: true,
+                collapsible: false,
+                buttonSettings: {
+                  cancel: true,
+                  next: true,
+                  previous: true,
+                },
+                input: false,
+                smev_req: {},
+                key: "panel",
+                esiaKey: {},
+              },
+            ],
+          },
+          modelId: 311,
+          actions: [
+            {
+              id: 732,
+              name: "Вернуться в реестр",
+              modelId: 311,
+              formId: 529,
+              hidden: false,
+              alwaysActive: false,
+              notRequiredAction: true,
+              backAction: true,
+              printAction: false,
+              signAction: false,
+            },
+            {
+              id: 731,
+              name: "Сохранить",
+              modelId: 311,
+              formId: 529,
+              hidden: false,
+              alwaysActive: false,
+              notRequiredAction: true,
+              backAction: false,
+              printAction: false,
+              signAction: false,
+            },
+          ],
+        },
+        type: 1,
+        startDate: "2023-06-05T07:59:31.618+00:00",
+        endDate: null,
+        active: true,
+        archive: false,
+        metadata: {},
+      },
+      form04: {
+        id: 213,
+        modelId: 311,
+        orderId: "0",
+        status: "",
+        data: {
+          params_handler_application: "",
+          params_handler_application_start: "",
+          params_handler_state_string: "",
+          lastName: "",
+          firstName: "",
+          middleName: "",
+          dateOfBirth: "",
+          textField2: "",
+          textField3: "",
+          regAdress: "",
+          faktAdress: "",
+          checkbox1: false,
+          documentType: "Паспорт",
+          passportSeries: "",
+          passportNumber: "",
+          passportDate: "",
+          passportCode: "",
+          passportOrganization: "",
+          textField1: "",
+          snils: "",
+          organizationNameSelect: {},
+          innOrg: "",
+          textField4: "",
+          textField6: "",
+          educationSelect: {},
+          educationYear: "",
+          scientificDegreeSelect: {},
+          degreeYear: "",
+          scientificTitleSelect: {},
+          titleYear: "",
+          publications: [],
+          konkursi: [],
+          nauchKol: [],
+          scienceWorkName: "",
+          direction: "",
+          annotation: "",
+          relevance: "",
+          newness1: "",
+          newness2: "",
+          newness3: "",
+          newness: "",
+          rashifrovka1: "",
+          rashifrovka2: "",
+          rashifrovka3: "",
+          rashifrovka4: "",
+          rashifrovka5: "",
+          rashifrovka6: "",
+          rashifrovka7: "",
+          submit1: false,
+          file: [],
+          file1: [],
+          file3: [],
+          file2: [],
+          file6: [],
+          file4: [],
+          file8: [],
+          checkbox8: false,
+          checkbox4: false,
+          checkbox5: false,
+          checkbox6: false,
+          checkbox: false,
+          checkbox3: false,
+          checkbox2: false,
+          checkbox7: false,
+          impactFaktorSum: 0,
+        },
+        form: {
+          id: 529,
+          name: "Заявление (черновик)",
+          scheme: {
+            components: [
+              {
+                extTypeCheckbox: false,
+                components: [
+                  {
+                    extTypeCheckbox: false,
+                    input: false,
+                    columns: [
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            input: true,
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            tableView: true,
+                            smev_req: {},
+                            disabled: true,
+                            label: "Номер",
+                            type: "textfield",
+                            key: "params_handler_application",
+                            esiaKey: {},
+                          },
+                        ],
+                        offset: 0,
+                        size: "md",
+                        width: 4,
+                        push: 0,
+                      },
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            enableMaxDateInput: false,
+                            widget: {
+                              minDate: null,
+                              enableTime: false,
+                              format: "dd.MM.yyyy",
+                              displayInTimezone: "viewer",
+                              noCalendar: false,
+                              type: "calendar",
+                              locale: "ru",
+                              time_24hr: true,
+                              allowInput: true,
+                              minuteIncrement: 1,
+                              mode: "single",
+                              useLocaleSettings: false,
+                              maxDate: null,
+                              disableWeekdays: false,
+                              disableWeekends: false,
+                              hourIncrement: 1,
+                            },
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            format: "dd.MM.yyyy",
+                            enableTime: false,
+                            tableView: false,
+                            datePicker: {
+                              disableWeekdays: false,
+                              disableWeekends: false,
+                            },
+                            label: "Дата создания",
+                            type: "datetime",
+                            enableMinDateInput: false,
+                            input: true,
+                            timePicker: {
+                              showMeridian: false,
+                            },
+                            smev_req: {},
+                            disabled: true,
+                            placeholder: "ДД.ММ.ГГГГ",
+                            key: "params_handler_application_start",
+                            esiaKey: {},
+                          },
+                        ],
+                        size: "md",
+                        offset: 0,
+                        width: 4,
+                        push: 0,
+                      },
+                      {
+                        pull: 0,
+                        components: [
+                          {
+                            extTypeCheckbox: false,
+                            input: true,
+                            dataGridLabel: false,
+                            hideOnChildrenHidden: false,
+                            tableView: true,
+                            smev_req: {},
+                            disabled: true,
+                            label: "Статус",
+                            type: "textfield",
+                            key: "params_handler_state_string",
+                            esiaKey: {},
+                          },
+                        ],
+                        offset: 0,
+                        size: "md",
+                        width: 4,
+                        push: 0,
+                      },
+                    ],
+                    dataGridLabel: false,
+                    smev_req: {},
+                    tableView: false,
+                    label: "Столбцы",
+                    type: "columns",
+                    key: "columns1",
+                    esiaKey: {},
+                  },
+                ],
+                collapsed: false,
+                dataGridLabel: false,
+                allowPrevious: false,
+                tableView: false,
+                label: "Бизнес-процесс №4",
+                title: "Бизнес-процесс №4",
+                type: "panel",
+                breadcrumbClickable: true,
+                collapsible: false,
+                buttonSettings: {
+                  cancel: true,
+                  next: true,
+                  previous: true,
+                },
+                input: false,
+                smev_req: {},
+                key: "panel",
+                esiaKey: {},
+              },
+            ],
+          },
+          modelId: 311,
+          actions: [
+            {
+              id: 11,
+              name: "notRequiredAction",
+              modelId: 311,
+              formId: 529,
+              hidden: false,
+              alwaysActive: false,
+              notRequiredAction: true,
+              backAction: false,
+              printAction: false,
+              signAction: false,
+            },
+            {
+              id: 12,
+              name: "backAction",
+              modelId: 311,
+              formId: 529,
+              hidden: false,
+              alwaysActive: false,
+              notRequiredAction: false,
+              backAction: true,
+              printAction: false,
+              signAction: false,
+            },
+            {
+              id: 13,
+              name: "printAction",
+              modelId: 311,
+              formId: 529,
+              hidden: false,
+              alwaysActive: false,
+              notRequiredAction: false,
+              backAction: false,
+              printAction: true,
+              signAction: false,
+            },
+            {
+              id: 14,
+              name: "signAction",
+              modelId: 311,
+              formId: 529,
+              hidden: false,
+              alwaysActive: false,
+              notRequiredAction: false,
+              backAction: false,
+              printAction: false,
+              signAction: true,
+            },
+          ],
+        },
+        type: 1,
+        startDate: "2023-06-05T07:59:31.618+00:00",
+        endDate: null,
+        active: true,
+        archive: false,
+        metadata: {},
+      },
     };
   },
 
@@ -1157,26 +2189,311 @@ export default {
       this.changeForm(formData, newFormData);
     },
 
-    getServiceInfo(serviceId) {
+    // Формы formio.js
+    async getForm(serviceId, appId) {
+      // let requestUrl;
+      // if (appId) {
+      //   requestUrl = this.dynamicUrl + "app/get-appData?id=" + appId;
+      //   if (serviceId === this.appsServiceId) {
+      //     console.log("Запрос формы существующего заявления");
+      //   } else if (serviceId === this.messagesServiceId) {
+      //     console.log("Запрос формы существующего сообщения");
+      //   } else if (serviceId === this.expertisesServiceId) {
+      //     console.log("Запрос формы существующей экспертизы");
+      //   }
+      // } else {
+      //   requestUrl =
+      //     this.dynamicUrl + "serv/get-appData?id=" + serviceId;
+      //   if (serviceId === this.appsServiceId) {
+      //     console.log("Запрос стартовой формы заявления");
+      //   } else if (serviceId === this.messagesServiceId) {
+      //     console.log("Запрос стартовой формы сообщения");
+      //   }
+      // }
+      // await axios
+      //   .get(requestUrl, {
+      //     withCredentials: true,
+      //   })
+      //   .then((response) => {
+      //     console.groupCollapsed("Стартовая форма");
+      //     console.log(response.data.applicationDTO);
+      //     console.groupEnd();
+      //     const newForm = response.data.applicationDTO;
+      //     newForm.data = JSON.parse(newForm.data);
+      //     newForm.form.scheme = JSON.parse(newForm.form.scheme);
+      //     if (serviceId === this.appsServiceId) {
+      //       this.appForm = newForm;
+      //     } else if (serviceId === this.messagesServiceId) {
+      //       this.messageForm = newForm;
+      //     } else if (serviceId === this.expertisesServiceId) {
+      //       this.expertiseForm = newForm;
+      //     }
+      //   })
+      //   .then(() => {
+      //     if (serviceId === this.appsServiceId) {
+      //       this.loaderFinish(this.appsLoader);
+      //     } else if (serviceId === this.messagesServiceId) {
+      //       this.loaderFinish(this.messagesLoader);
+      //     } else if (serviceId === this.expertisesServiceId) {
+      //       this.loaderFinish(this.expertisesLoader);
+      //     }
+      //   });
+      console.log(serviceId);
+      console.log(appId);
+      this.appForm.loader.isLoading = true;
+      this.appForm.loader.isResponse = false;
+      setTimeout(() => {
+        this.appForm = JSON.parse(JSON.stringify(this["form" + serviceId]));
+        this.appForm.loader = {};
+        this.appForm.loader.isLoading = false;
+        this.appForm.loader.isResponse = true;
+      }, 3000);
+    },
+    async invokeAction(action) {
+      console.log("Выполнение действия " + action.id);
+      const formElem = document.getElementById("application-form-04");
+      console.log("formElem");
+      console.log(formElem);
+      console.log(
+        formElem.formio.checkValidity(formElem.formio.submission.data)
+      );
+      const isValidFormData = this.$refs.vueForm.formio.checkValidity(
+        this.$refs.vueForm.formio.submission.data
+      );
+      // Действие "Без проверки" или форма заполнена верно
+      if (isValidFormData || action.notRequiredAction) {
+        if (action.notRequiredAction) {
+          console.log("Выполняется действие без проверки");
+        } else {
+          console.log("Действие с проверкой. Форма валидна");
+        }
+        this.loaderStart(this.loader, "Отправка данных заявления");
+        // this.loader.comment = "Отправка данных заявления";
+        // this.loader.isResponse = false;
+        // this.loader.isLoading = true;
+        // setTimeout(this.invoke, 1000, action, action.backAction);
+        await this.invoke(action, action.backAction);
+        this.loaderFinish(this.loader);
+      } else {
+        console.log("Форма не валидна");
+        this.$refs.vueForm.formio.submit();
+      }
+    },
+    async invoke(action, isBackAction = false) {
+      console.log(`isBackAction = ${isBackAction}`);
+      if (action.signAction) {
+        this.signActionId = action.id;
+        this.openModalSignature();
+        this.cspIntervalId = setInterval(this.cspWaiting, 500);
+        return;
+      }
+      const request = {
+        actionId: action.id,
+        userId: 0,
+        roleId: 0,
+        orgId: 0,
+        appId: this.appForm.id,
+        data: JSON.stringify(this.appForm.data),
+      };
+      console.log("Тело запроса Action-invoke");
+      console.log(request);
       axios
-        .get(this.url + "serv/get-model?id=" + serviceId)
+        .post(this.dynamicUrl + "app/action-invoke", request, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
         .then((response) => {
-          this.measure = response.data;
-          this.measure.newDescription = JSON.parse(
-            response.data.newDescription
-          );
-          console.groupCollapsed(
-            "Детальная информация по мере поддержки ",
-            response.data.name
-          );
-          console.log(this.measure);
-          console.groupEnd();
+          console.log("Ответ на экшн");
+          console.log(response);
+          if (response.data.responseObject) {
+            this.downloadFileFromObject(
+              JSON.parse(response.data.responseObject)
+            );
+          } else {
+            if (isBackAction) {
+              if (+this.$route.params.appId) {
+                this.$router.go(-1);
+              } else {
+                this.$router.go(-2);
+              }
+            } else {
+              this.getNextForm(response);
+            }
+          }
+        })
+        .then(() => {
+          this.isResponse = true;
+          this.isLoading = false;
+          this.isFirstLoad = true;
+        });
+    },
+    // Скачивание файла из объекта
+    downloadFileFromObject(fileObject) {
+      console.log("Объект файла");
+      console.log(fileObject);
+      let link = document.createElement("a");
+      if (fileObject.fileName) {
+        link.setAttribute("download", fileObject.fileName);
+      }
+      if (fileObject.name) {
+        link.setAttribute("download", fileObject.name);
+      }
+      link.setAttribute(
+        "href",
+        "data:application/octet-stream;base64," + fileObject.fileData
+      );
+      link.click();
+    },
+    // Переход к следующей форме (стандартное действие)
+    getNextForm(response) {
+      console.log("Следующая форма");
+      console.log(response);
+      let nextForm = response.data.applicationDTO;
+      nextForm.data = JSON.parse(nextForm.data);
+      nextForm.form.scheme = JSON.parse(nextForm.form.scheme);
+      this.appForm = nextForm;
+    },
+
+    cspWaiting() {
+      console.log("Проверка загрузки Крипто-ПРО");
+      if (window.cspEnabled) {
+        this.isResponse = true;
+        this.isLoading = false;
+        this.isFirstLoad = true;
+        clearInterval(this.cspIntervalId);
+        console.log("Крипто-ПРО загружен");
+      }
+    },
+
+    openModalSignature() {
+      console.log("---Точка 4");
+      console.log("Открытие модального окна");
+      this.$refs["modal-signature"].show();
+      window.checkExtension(true);
+    },
+
+    // Загрузка скриптов КриптоПро
+    loadCrypto() {
+      var file1 = document.createElement("script");
+      file1.setAttribute("type", "text/javascript");
+      file1.setAttribute("src", "extensionLoading.js");
+      document.getElementsByTagName("head")[0].appendChild(file1);
+      var file2 = document.createElement("script");
+      file2.setAttribute("type", "text/javascript");
+      file2.setAttribute("src", "cadesplugin_api.js");
+      document.getElementsByTagName("head")[0].appendChild(file2);
+      var file3 = document.createElement("script");
+      file3.setAttribute("type", "text/javascript");
+      file3.setAttribute("src", "Code.js");
+      document.getElementsByTagName("head")[0].appendChild(file3);
+      var file4 = document.createElement("script");
+      file4.setAttribute("type", "text/javascript");
+      file4.setAttribute("src", "pluginLoading.js");
+      document.getElementsByTagName("body")[0].appendChild(file4);
+    },
+    // Подпись файла
+    signAction() {
+      // window.Common_SignCadesBES('CertListBox');
+      // alert("Привет от BV");
+      const request = {
+        certificate: {
+          thumbprint: window.dataToSign.thumbprint,
+          subject: window.dataToSign.subject,
+          from: window.dataToSign.from,
+          validDue: window.dataToSign.validDue,
+        },
+        actionPayloadDTO: {
+          actionId: this.signActionId,
+          userId: 0,
+          roleId: 0,
+          orgId: 0,
+          appId: this.appForm.id,
+          data: JSON.stringify(this.appForm.data),
+        },
+      };
+      console.log(request);
+      axios
+        .post(this.url + "app/action-pdfstamp", request, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((response) => {
+          console.log("Ответ на экшн");
+          console.log(response);
+          console.log("Содержимое data.applicationDTO.data");
+          console.log(JSON.parse(response.data.applicationDTO.data));
+          console.log("Содержимое data.responseObject");
+          console.log(JSON.parse(response.data.responseObject));
+          console.log("Содержимое hashToSign");
+          console.log(JSON.parse(response.data.responseObject).hashToSign);
+          this.hashToSign = JSON.parse(response.data.responseObject).hashToSign;
+          window.dataToSign.hashToSign = JSON.parse(
+            response.data.responseObject
+          ).hashToSign;
+          console.log(this.hashToSign);
+          this.signedFileName = JSON.parse(
+            response.data.responseObject
+          ).fileName;
+          console.log(this.signedFileName);
+          window.Common_SignCadesBES("CertListBox");
+          let hashField = document.getElementById("DataToSignTxtBox");
+          console.log(hashField);
+          // hashField.textContent = JSON.parse(response.data.responseObject).hashToSign
+          this.signatureIntervalId = setInterval(this.signWaiting, 1000);
+          this.$bvModal.hide("signature");
+        });
+    },
+    signWaiting() {
+      this.signatureTimeoutId = setTimeout(this.clearSignWaitingTimers, 600000);
+      console.log("Проверка наличия подписи");
+      if (window.dataToSign.signature) {
+        this.requestSignAction();
+        this.clearSignWaitingTimers();
+        window.dataToSign = {};
+      }
+    },
+    clearSignWaitingTimers() {
+      clearInterval(this.signatureIntervalId);
+      clearTimeout(this.signatureTimeoutId);
+    },
+    requestSignAction() {
+      console.log(window.dataToSign);
+      const request = {
+        applicationId: this.appForm.id,
+        signature: window.dataToSign.signature,
+        hashToSign: this.hashToSign,
+        filename: this.signedFileName,
+      };
+      console.log("Данные отправляемые для подписанного файла");
+      console.log(request);
+      axios
+        .post(this.url + "app/action-insert-signdata", request, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.fileData) {
+            console.log(response.data);
+            this.downloadFileFromObject(response.data);
+          }
         });
     },
 
     // Базовые методы
-
     // Изменения формы с валидацией и возможной кастомной обработкой
+    // Лоадер
+    loaderStart(loader, loaderComment) {
+      loader.isResponse = false;
+      loader.isLoading = true;
+      if (loaderComment) {
+        loader.comment = loaderComment;
+      }
+    },
+    loaderFinish(loader) {
+      loader.isResponse = true;
+      loader.isLoading = false;
+    },
     changeFormWithValidate(formData, newFormData, customChangeFormMethodName) {
       console.groupCollapsed(
         `Изменение формы «${formData.title}» с валидацией`
@@ -1289,7 +2606,6 @@ export default {
 
   mounted: async function () {
     console.log("Смонтирован компонент App");
-    // await this.getAppConfig();
   },
 };
 </script>

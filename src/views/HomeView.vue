@@ -42,36 +42,45 @@
 
             <div class="row justify-content-md-center">
               <div class="col-12 col-md-10 col-lg-8 col-xl-6">
-                <!--                <CollapseButton-->
-                <!--                  target-id="huntingAppCollapse"-->
-                <!--                  class="btn-primary btn-block btn-lg"-->
-                <!--                  @click="selectAccordionItem('huntingAppCollapse')"-->
-                <!--                >-->
-                <!--                  <div class="collapse-title">-->
-                <!--                    Подать заявку на добычу охотничьих ресурсов-->
-                <!--                  </div>-->
-                <!--                </CollapseButton>-->
-                <button class="btn btn-primary btn-block btn-lg">
-                  Подать заявку на добычу охотничьих ресурсов
-                </button>
+                <CollapseButton
+                  :target-id="
+                    selectedAccordionItemId === 'huntingAppCollapse' ||
+                    !selectedAccordionItemId
+                      ? 'formCollapse'
+                      : ''
+                  "
+                  class="btn-primary btn-block btn-lg"
+                  @click="
+                    selectAccordionItem('huntingAppCollapse'),
+                      $emit('get-start-form', '01')
+                  "
+                >
+                  <div class="collapse-title">
+                    Подать заявку на добычу охотничьих ресурсов
+                  </div>
+                </CollapseButton>
               </div>
             </div>
             <div class="my-2 row justify-content-md-center">
               <div class="col-12 col-md-10 col-lg-8 col-xl-6">
-                <!--                <CollapseButton-->
-                <!--                  target-id="preserveAppCollapse"-->
-                <!--                  class="btn-primary btn-block btn-lg"-->
-                <!--                  @click="selectAccordionItem('preserveAppCollapse')"-->
-                <!--                >-->
-                <!--                  <div class="collapse-title">-->
-                <!--                    Подать уведомление об участии в мероприятиях по сохранению-->
-                <!--                    охотничьих ресурсов-->
-                <!--                  </div>-->
-                <!--                </CollapseButton>-->
-                <button class="btn btn-primary btn-block btn-lg">
-                  Подать уведомление об участии в мероприятиях по сохранению
-                  охотничьих ресурсов
-                </button>
+                <CollapseButton
+                  :target-id="
+                    selectedAccordionItemId === 'preserveAppCollapse' ||
+                    !selectedAccordionItemId
+                      ? 'formCollapse'
+                      : ''
+                  "
+                  class="btn-primary btn-block btn-lg"
+                  @click="
+                    selectAccordionItem('preserveAppCollapse'),
+                      $emit('get-start-form', '02')
+                  "
+                >
+                  <div class="collapse-title">
+                    Подать уведомление об участии в мероприятиях по сохранению
+                    охотничьих ресурсов
+                  </div>
+                </CollapseButton>
               </div>
             </div>
 
@@ -107,83 +116,103 @@
               <div
                 class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3 mt-2"
               >
-                <!--                <CollapseButton-->
-                <!--                  target-id="checkAppCollapse"-->
-                <!--                  class="btn-primary btn-block btn-lg"-->
-                <!--                  @click="selectAccordionItem('checkAppCollapse')"-->
-                <!--                >-->
-                <!--                  <div class="collapse-title">Узнать статус заявки</div>-->
-                <!--                </CollapseButton>-->
-                <button class="btn btn-primary btn-block btn-lg">
-                  Узнать статус заявки
-                </button>
+                <CollapseButton
+                  :target-id="
+                    selectedAccordionItemId === 'checkAppCollapse' ||
+                    !selectedAccordionItemId
+                      ? 'formCollapse'
+                      : ''
+                  "
+                  class="btn-primary btn-block btn-lg"
+                  @click="
+                    selectAccordionItem('checkAppCollapse'),
+                      $emit('get-start-form', '03')
+                  "
+                >
+                  <div class="collapse-title">Узнать статус заявки</div>
+                </CollapseButton>
               </div>
               <div
                 class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3 my-2"
               >
-                <!--                <CollapseButton-->
-                <!--                  target-id="checkNotificationCollapse"-->
-                <!--                  class="btn-primary btn-block btn-lg"-->
-                <!--                  @click="selectAccordionItem('checkNotificationCollapse')"-->
-                <!--                >-->
-                <!--                  <div class="collapse-title">Проверить статус уведомления</div>-->
-                <!--                </CollapseButton>-->
-                <button class="btn btn-primary btn-block btn-lg">
-                  Проверить статус уведомления
-                </button>
+                <CollapseButton
+                  :target-id="
+                    selectedAccordionItemId === 'checkNotificationCollapse' ||
+                    !selectedAccordionItemId
+                      ? 'formCollapse'
+                      : ''
+                  "
+                  class="btn-primary btn-block btn-lg"
+                  @click="
+                    selectAccordionItem('checkNotificationCollapse'),
+                      $emit('get-start-form', '04')
+                  "
+                >
+                  <div class="collapse-title">Проверить статус уведомления</div>
+                </CollapseButton>
               </div>
             </div>
           </div>
-          <!-- <div
-            v-if="selectedAccordionItemId"
-            class="accordion"
-            id="huntingFormsAccordion"
-          >
-            <div class="card-list row">
-              <div class="col-12">
-                <Card class="shadow-sm my-4">
-                  <template v-slot:card-body>
-                    <Collapse
-                      id="huntingAppCollapse"
-                      parent-id="huntingFormsAccordion"
-                    >
-                      <div>
-                        <div>{{ huntingAppForm.title }}</div>
-                        <Form :form-data="huntingAppForm" />
-                      </div>
-                    </Collapse>
-                    <Collapse
-                      id="preserveAppCollapse"
-                      parent-id="huntingFormsAccordion"
-                    >
-                      <div>
-                        <div>{{ preserveAppForm.title }}</div>
-                        <Form :form-data="preserveAppForm" />
-                      </div>
-                    </Collapse>
-                    <Collapse
-                      id="checkAppCollapse"
-                      parent-id="huntingFormsAccordion"
-                    >
-                      <div>
-                        <div>{{ checkAppForm.title }}</div>
-                        <Form :form-data="checkAppForm" />
-                      </div>
-                    </Collapse>
-                    <Collapse
-                      id="checkNotificationCollapse"
-                      parent-id="huntingFormsAccordion"
-                    >
-                      <div>
-                        <div>{{ checkNotificationForm.title }}</div>
-                        <Form :form-data="checkNotificationForm" />
-                      </div>
-                    </Collapse>
-                  </template>
-                </Card>
-              </div>
-            </div>
-          </div> -->
+          <!-- Содержимое аккордионов -->
+          <Card v-show="selectedAccordionItemId" class="shadow-sm my-4">
+            <template v-slot:card-body>
+              <Collapse id="formCollapse">
+                <Loader
+                  v-if="appForm.loader.isLoading && !appForm.loader.isResponse"
+                  comment="Загрузка формы"
+                />
+                <div
+                  v-show="appForm.loader.isResponse"
+                  id="application-form-04"
+                  class="row pt-2"
+                >
+                  <div class="col-12">
+                    <h4 class="text-center py-2">
+                      {{ measure.name + ": " + appForm.form.name }}
+                    </h4>
+                  </div>
+                  <div class="col-10">
+                    <Form
+                      :form="appForm.form.scheme"
+                      :submission="appForm"
+                      language="ru"
+                      :options="{
+                        readOnly: !appForm.active,
+                      }"
+                      ref="vueForm"
+                    />
+                  </div>
+                  <div
+                    v-if="
+                      appForm.form.actions && appForm.form.actions.length > 0
+                    "
+                    id="action-buttons-04"
+                    class="col-2"
+                  >
+                    <template v-for="action of appForm.form.actions">
+                      <template
+                        v-if="
+                          !action.hidden &&
+                          (appForm.active ||
+                            (action.alwaysActive && !isLastForm))
+                        "
+                      >
+                        <button
+                          :key="action.id"
+                          type="button"
+                          class="btn btn-block btn-primary"
+                          @click="$emit('form-action', action)"
+                        >
+                          {{ action.name }}
+                        </button>
+                      </template>
+                    </template>
+                    <!--          <button class="btn btn-warning" @click="hideLoaders">убрать лоадеры</button>-->
+                  </div>
+                </div>
+              </Collapse>
+            </template>
+          </Card>
         </div>
       </div>
     </div>
@@ -193,1387 +222,26 @@
 
 <script>
 import TheFooter from "../components/TheFooter";
-/*import Collapse from "../components/universal/BS46Collapse";
+import Collapse from "../components/universal/BS46Collapse";
 import CollapseButton from "../components/universal/BS46CollapseButton";
 import Card from "../components/universal/BS46Card";
-import Form from "../components/universal/BS46Form";*/
+// import Form from "../components/universal/BS46Form";
+import Loader from "../components/universal/BS46Loader";
+import { Form } from "vue-formio";
 export default {
   name: "HomeView",
   components: {
-    /*Form,
+    Loader,
+    Form,
     Card,
     CollapseButton,
-    Collapse,*/
+    Collapse,
     TheFooter,
   },
+  props: ["measure", "appForm"],
   data() {
     return {
       selectedAccordionItemId: null,
-      settingsForm: {
-        notification: {
-          form: {
-            title: "Настройки уведомления",
-            validity: false,
-            horizontal: true,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            fields: [
-              {
-                id: "notification-need",
-                label: "Разместить уведомление",
-                type: "checkbox",
-                width: 12,
-                responsive: "",
-                required: false,
-                visibility: true,
-                defaultValueLabel: "Выберите",
-                horizontal: false,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: false,
-              },
-              {
-                id: "notification-start-immediately",
-                label: "Начало публикации сразу после сохранения",
-                type: "checkbox",
-                width: 12,
-                responsive: "",
-                required: false,
-                disabled: false,
-                visibility: false,
-                defaultValueLabel: "Выберите",
-                horizontal: false,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: false,
-              },
-              {
-                id: "notification-start-date",
-                label: "Дата публикации уведомления",
-                type: "input",
-                subtype: "datetime-local",
-                width: 12,
-                responsive: "",
-                required: true,
-                disabled: false,
-                visibility: false,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "notification-finish-manual",
-                label: "Снятие с публикации вручную",
-                type: "checkbox",
-                width: 12,
-                responsive: "",
-                required: false,
-                disabled: false,
-                defaultValueLabel: "Выберите",
-                horizontal: false,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: false,
-              },
-              {
-                id: "notification-finish-date",
-                label: "Дата снятия уведомления с публикации",
-                type: "input",
-                subtype: "datetime-local",
-                width: 12,
-                responsive: "",
-                required: true,
-                disabled: false,
-                visibility: false,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "notification-text",
-                label: "Текст уведомления",
-                type: "textarea",
-                width: 12,
-                responsive: "",
-                required: true,
-                disabled: false,
-                visibility: false,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "notification-font-size",
-                label: "Размер",
-                type: "select",
-                itemsList: [
-                  { id: 1, value: 1, label: "Нормальный" },
-                  { id: 2, value: 2, label: "Укрупненный" },
-                  { id: 3, value: 3, label: "Огромный" },
-                ],
-                width: 12,
-                responsive: "",
-                required: true,
-                disabled: false,
-                visibility: false,
-                defaultValueLabel: "Выберите размер",
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                values: [],
-              },
-              {
-                id: "notification-color",
-                label: "Цвет уведомления",
-                type: "select",
-                itemsList: [
-                  { id: 1, value: 1, label: "Синий" },
-                  { id: 2, value: 2, label: "Серый" },
-                  { id: 3, value: 3, label: "Зелёный" },
-                  { id: 4, value: 4, label: "Красный" },
-                  { id: 5, value: 5, label: "Жёлтый" },
-                  { id: 6, value: 6, label: "Голубой" },
-                  { id: 7, value: 7, label: "Светлый" },
-                  { id: 8, value: 8, label: "Тёмный" },
-                ],
-                width: 12,
-                responsive: "",
-                required: true,
-                disabled: false,
-                visibility: false,
-                defaultValueLabel: "Выберите цвет",
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                values: [],
-              },
-            ],
-          },
-        },
-        server: {
-          form: {
-            title: "Настройки уведомления",
-            validity: false,
-            horizontal: true,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            fields: [
-              {
-                id: "server-internal",
-                label: "Интерфейс и серверная часть находятся на одном домене",
-                type: "checkbox",
-                width: 12,
-                responsive: "",
-                required: false,
-                visibility: true,
-                defaultValueLabel: "Выберите",
-                horizontal: false,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: true,
-              },
-              {
-                id: "server-external-address",
-                label: "Адрес сервера открытого контура",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: true,
-                disabled: false,
-                visibility: false,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-            ],
-          },
-        },
-        logo: {
-          form: {
-            title: "Настройки уведомления",
-            validity: false,
-            horizontal: true,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            fields: [
-              {
-                id: "logo-image-file",
-                label: "Прикрепленные документы",
-                type: "input",
-                subtype: "file",
-                comment: "Файл логотипа",
-                button: {
-                  text: "Добавить документ",
-                  icon: {
-                    url: "/icons/paperclip.svg",
-                  },
-                },
-                file: {
-                  name: "",
-                  base64: "",
-                },
-                width: 12,
-                responsive: "",
-                required: false,
-                visibility: true,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "logo-brand",
-                label: "Наименование организации",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: false,
-                visibility: true,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-            ],
-          },
-        },
-        footer: {
-          form: {
-            title: "Настройки футера",
-            validity: false,
-            horizontal: true,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            fields: [
-              {
-                id: "footer-phone",
-                label: "Номер телефона",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: false,
-                visibility: true,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "footer-email",
-                label: "Адрес электронной почты",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: false,
-                visibility: true,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "footer-link-01-name",
-                label: "Наименование ссылки №1",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: false,
-                visibility: true,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "footer-link-01-url",
-                label: "Адрес ссылки №1",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: true,
-                disabled: false,
-                visibility: false,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "footer-link-02-name",
-                label: "Наименование ссылки №2",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: false,
-                visibility: true,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "footer-link-02-url",
-                label: "Наименование структуры/организации",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: true,
-                disabled: false,
-                visibility: false,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "footer-link-03-name",
-                label: "Наименование ссылки №3",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: false,
-                visibility: true,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "footer-link-03-url",
-                label: "Адрес ссылки №3",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: true,
-                disabled: false,
-                visibility: false,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-              {
-                id: "footer-copyright-need",
-                label: "Отображать копирайт",
-                type: "checkbox",
-                width: 12,
-                responsive: "",
-                required: false,
-                visibility: true,
-                defaultValueLabel: "Выберите",
-                horizontal: false,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: false,
-              },
-              {
-                id: "footer-copyright-text",
-                label: "Текст копирайта",
-                type: "input",
-                subtype: "text",
-                width: 12,
-                responsive: "",
-                required: true,
-                disabled: false,
-                visibility: true,
-                horizontal: true,
-                horizontalWidth: {
-                  label: {
-                    width: 4,
-                    responsive: "col-sm-5",
-                  },
-                  field: {
-                    width: 8,
-                    responsive: "col-sm-7",
-                  },
-                },
-                value: "",
-              },
-            ],
-          },
-        },
-      },
-
-      huntingAppForm: {
-        title: "Заявка на добычу охотничьих ресурсов",
-        validity: false,
-        horizontal: true,
-        horizontalWidth: {
-          label: {
-            width: 4,
-            responsive: "col-sm-5",
-          },
-          field: {
-            width: 8,
-            responsive: "col-sm-7",
-          },
-        },
-        fields: [
-          {
-            id: "hunting-app-surname",
-            label: "Фамилия",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6 col-lg-4",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-name",
-            label: "Имя",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6 col-lg-4",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-patronymic",
-            label: "Отчество (при наличии)",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-lg-4",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-doc-series",
-            label: "Серия охотничьего билета",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-doc-number",
-            label: "Номер охотничьего билета",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-passport-series-number",
-            label: "Серия и номер паспорта (необязательное поле)",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6 col-lg-4",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-passport-issuer",
-            label: "Кем выдан паспорт (необязательное поле)",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6 col-lg-4",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-passport-issue-date",
-            label: "Когда выдан паспорт (необязательное поле)",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6 col-lg-4",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-birth-place",
-            label: "Место рождения (необязательное поле)",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-address",
-            label: "Почтовый адрес (необязательное поле)",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-birthday",
-            label: "Дата рождения",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-phone",
-            label: "Контактный телефон",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-issuer",
-            label: "Кем выдан охотничий билет",
-            type: "select",
-            itemsList: [
-              {
-                id: 1,
-                value: 1,
-                label:
-                  "Департаментом гражданской защиты, охраны окружающей среды и природных ресурсов",
-              },
-            ],
-            width: 12,
-            responsive: "",
-            defaultValueLabel: "Выберите ведомство",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            values: [],
-          },
-          {
-            id: "hunting-app-issue-date",
-            label: "Когда выдан охотничий билет",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "hunting-app-email",
-            label: "Адрес электронной почты (необязательное поле)",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-        ],
-      },
-      preserveAppForm: {
-        title:
-          "Уведомление об участии в мероприятиях по сохранению охотничьих ресурсов",
-        validity: false,
-        horizontal: true,
-        horizontalWidth: {
-          label: {
-            width: 4,
-            responsive: "col-sm-5",
-          },
-          field: {
-            width: 8,
-            responsive: "col-sm-7",
-          },
-        },
-        fields: [
-          {
-            id: "preserve-app-surname",
-            label: "Фамилия",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6 col-lg-4",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "preserve-app-name",
-            label: "Имя",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6 col-lg-4",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "preserve-app-patronymic",
-            label: "Отчество (при наличии)",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-lg-4",
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "preserve-app-address",
-            label: "Почтовый адрес",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "preserve-app-doc-series",
-            label: "Серия охотничьего билета",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "preserve-app-doc-number",
-            label: "Номер охотничьего билета",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "preserve-app-birthday",
-            label: "Дата рождения",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "preserve-app-phone",
-            label: "Контактный телефон",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "preserve-app-issuer",
-            label: "Кем выдан охотничий билет",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "preserve-app-issue-date",
-            label: "Когда выдан охотничий билет",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "preserve-app-email",
-            label: "Адрес электронной почты (необязательное поле)",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-        ],
-      },
-      checkAppForm: {
-        title: "Статус заявки",
-        validity: false,
-        horizontal: true,
-        horizontalWidth: {
-          label: {
-            width: 4,
-            responsive: "col-sm-5",
-          },
-          field: {
-            width: 8,
-            responsive: "col-sm-7",
-          },
-        },
-        fields: [
-          {
-            id: "check-app-doc-series",
-            label: "Серия охотничьего билета",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "check-app-doc-number",
-            label: "Номер охотничьего билета",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-        ],
-      },
-      checkNotificationForm: {
-        title: "Статус уведомления",
-        validity: false,
-        horizontal: true,
-        horizontalWidth: {
-          label: {
-            width: 4,
-            responsive: "col-sm-5",
-          },
-          field: {
-            width: 8,
-            responsive: "col-sm-7",
-          },
-        },
-        fields: [
-          {
-            id: "check-notification-doc-series",
-            label: "Серия охотничьего билета",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-          {
-            id: "check-notification-doc-number",
-            label: "Номер охотничьего билета",
-            type: "input",
-            subtype: "text",
-            width: 12,
-            responsive: "col-sm-6",
-            required: true,
-            disabled: false,
-            visibility: true,
-            horizontal: false,
-            horizontalWidth: {
-              label: {
-                width: 4,
-                responsive: "col-sm-5",
-              },
-              field: {
-                width: 8,
-                responsive: "col-sm-7",
-              },
-            },
-            value: "",
-          },
-        ],
-      },
     };
   },
 
@@ -1583,9 +251,15 @@ export default {
         this.selectedAccordionItemId = null;
       } else {
         this.selectedAccordionItemId = accordionItemId;
-        // document.getElementById(accordionItemId).scrollIntoView(true);
       }
     },
+  },
+
+  mounted() {
+    console.log("Смонтирован HomeView");
+    console.log(this);
+    console.log(this.$refs);
+    console.log(this.$refs.vueForm);
   },
 };
 </script>
