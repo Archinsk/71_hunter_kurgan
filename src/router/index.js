@@ -15,6 +15,11 @@ const routes = [
     name: "SettingsView",
     component: () => import("../views/SettingsView"),
   },
+  {
+    path: "/service-info/:serviceId",
+    name: "ServiceInfoView",
+    component: () => import("../views/ServiceInfoView"),
+  },
 ];
 
 const router = new VueRouter({

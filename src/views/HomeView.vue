@@ -83,6 +83,21 @@
                 </CollapseButton>
               </div>
             </div>
+            <button
+              v-for="service of services"
+              :key="service.id"
+              type="button"
+              data-toggle="collapse"
+              data-target="#formCollapse"
+              aria-expanded="false"
+              aria-controls="formCollapse"
+              class="btn btn-collapse btn-primary btn-block btn-lg"
+              @click="$emit('show-service-info', service.id)"
+            >
+              <div class="collapse-title">
+                {{ service.name }}
+              </div>
+            </button>
 
             <ul class="list-unstyled pt-3 m-0">
               <li class="color-gray">
@@ -238,7 +253,7 @@ export default {
     Collapse,
     TheFooter,
   },
-  props: ["measure", "appForm"],
+  props: ["services", "measure", "appForm"],
   data() {
     return {
       selectedAccordionItemId: null,

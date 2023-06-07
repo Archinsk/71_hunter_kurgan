@@ -2,6 +2,8 @@
   <div id="app">
     <router-view
       :config="config"
+      :services="services.list"
+      :service-info="serviceInfo"
       :settings-form="settingsForm"
       :measure="measure"
       :app-form="appForm"
@@ -28,6 +30,8 @@
         )
       "
       @set-config="setConfig"
+      @show-service-info="showServiceInfo($event)"
+      @show-service-first-form="showServiceFirstForm($event)"
       @get-start-form="getForm($event)"
       @form-action="invokeAction($event)"
     />
@@ -41,7 +45,8 @@ export default {
   data() {
     return {
       config: {
-        staticUrl: "/",
+        // staticUrl: "/",
+        staticUrl: "https://open-grata-nso.isands.ru",
         adminSettings: {
           notification: {
             publishNeed: false,
@@ -88,6 +93,20 @@ export default {
               text: "© Информационные системы и сервисы, 2022",
             },
           },
+        },
+      },
+      services: {
+        list: [],
+        pagination: {
+          itemsTotal: 0,
+          page: 1,
+          pageSize: 10,
+          itemsPerPage: [10, 25, 50],
+        },
+      },
+      serviceInfo: {
+        newDescription: {
+          chapters: [],
         },
       },
       settingsForm: {
@@ -1727,13 +1746,30 @@ export default {
     dynamicUrl: function () {
       let dynamicUrl;
       if (this.config.adminSettings.server.ownServer) {
-        dynamicUrl = this.config.staticUrl;
+        dynamicUrl = this.config.staticUrl + "/api/";
       } else {
         dynamicUrl =
           this.config.adminSettings.server.externalServerUrl + "/api/";
       }
       return dynamicUrl;
     },
+    /*queryParams: function () {
+      let query =
+        "?pageNum=" +
+        (this.page - 1) +
+        "&pageSize=" +
+        this.pageSize +
+        "&sortCol=id&sortDesc=false&active=true";
+      if (this.selectedFilters.length) {
+        this.selectedFilters.forEach((tag) => {
+          query += "&tags=" + tag;
+        });
+      }
+      if (this.searchText) {
+        query += "&name=" + this.searchText;
+      }
+      return query;
+    },*/
 
     setConfigRequest: function () {
       let setConfigRequest = {
@@ -1850,6 +1886,45 @@ export default {
   },
 
   methods: {
+    // Получение списка сервисов
+    getServises() {
+      let queryParams =
+        "?pageNum=0&pageSize=10&sortCol=id&sortDesc=false&active=true";
+      axios
+        .get(this.dynamicUrl + "serv/get-services" + queryParams)
+        .then((response) => {
+          this.services.list = response.data.content;
+          this.services.pagination.itemsTotal = response.data.totalElements;
+          console.groupCollapsed("Список сервисов");
+          console.log(response.data);
+          console.groupEnd();
+        });
+    },
+    // Детальная информация по сервису
+    async showServiceInfo(serviceId) {
+      await this.getServiceInfo(serviceId);
+      console.log(`Показ сервиса с id = ${serviceId}`);
+      this.goToView("/service-info/" + serviceId);
+    },
+    async getServiceInfo(serviceId) {
+      await axios
+        .get(this.dynamicUrl + "serv/get-model?id=" + serviceId)
+        .then((response) => {
+          this.serviceInfo = response.data;
+          this.serviceInfo.newDescription = JSON.parse(
+            response.data.newDescription
+          );
+          console.groupCollapsed(
+            `Детальная информация по сервису "${response.data.name}"`
+          );
+          console.log(response.data);
+          console.groupEnd();
+        });
+    },
+    // показать первую форму сервиса
+    showServiceFirstForm(serviceId) {
+      console.log(serviceId);
+    },
     // Админка
     // Чтение админки
     async getAppConfig() {
@@ -2483,6 +2558,15 @@ export default {
     // Базовые методы
     // Изменения формы с валидацией и возможной кастомной обработкой
     // Лоадер
+    goToView(targetView) {
+      this.$router.push(targetView);
+    },
+    isEmptyObject(obj) {
+      for (let key in obj) {
+        return false;
+      }
+      return true;
+    },
     loaderStart(loader, loaderComment) {
       loader.isResponse = false;
       loader.isLoading = true;
@@ -2605,6 +2689,7 @@ export default {
   },
 
   mounted: async function () {
+    this.getServises();
     console.log("Смонтирован компонент App");
   },
 };
