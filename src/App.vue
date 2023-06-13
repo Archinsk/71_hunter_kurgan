@@ -3,10 +3,10 @@
     <router-view
       :config="config"
       :services="services.list"
-      :service-info="serviceInfo"
+      :service="service"
       :settings-form="settingsForm"
       :measure="measure"
-      :app-form="appForm"
+      :app-form="service.form"
       @change-settings-form-part1="
         changeFormWithValidate(
           settingsForm.notification.form,
@@ -32,7 +32,7 @@
       @set-config="setConfig"
       @show-service-info="showServiceInfo($event)"
       @show-service-first-form="showServiceFirstForm($event)"
-      @get-start-form="getForm($event)"
+      @get-start-form="getServiceForm($event)"
       @form-action="invokeAction($event)"
     />
   </div>
@@ -47,6 +47,7 @@ export default {
       config: {
         // staticUrl: "/",
         staticUrl: "https://open-grata-nso.isands.ru",
+        // staticUrl: "https://open-newtemplate.isands.ru",
         adminSettings: {
           notification: {
             publishNeed: false,
@@ -104,9 +105,33 @@ export default {
           itemsPerPage: [10, 25, 50],
         },
       },
-      serviceInfo: {
-        newDescription: {
-          chapters: [],
+      service: {
+        info: {},
+        forms: [],
+        form: {
+          active: false,
+          data: {},
+          form: {
+            actions: [],
+            id: 0,
+            modelId: 0,
+            scheme: {},
+          },
+          id: 0,
+          orderId: "",
+          status: "",
+          loader: {
+            isLoading: false,
+            isResponse: false,
+            comment: "",
+          },
+        },
+        loader: {
+          loader: {
+            isLoading: false,
+            isResponse: false,
+            comment: "",
+          },
         },
       },
       settingsForm: {
@@ -712,7 +737,7 @@ export default {
         },
       },
       measure: {},
-      appForm: {
+      /*appForm: {
         active: false,
         data: {},
         form: {
@@ -729,7 +754,7 @@ export default {
           isResponse: false,
           comment: "",
         },
-      },
+      },*/
 
       form01: {
         id: 213,
@@ -1886,10 +1911,32 @@ export default {
   },
 
   methods: {
+    // Некоторые REST-запросы закрыты для неавторизованных пользователей
+    async fakeSignInLocal() {
+      const request = {
+        login: "mihail",
+        password: "123456",
+      };
+      await axios
+        .post(this.dynamicUrl + "auth/local-login", request, {
+          withCredentials: true,
+        })
+        .then(() => {
+          console.log("Пользователь успешно авторизован");
+        })
+        .catch((error) => {
+          if (error.response.status === 406) {
+            console.log("Пользователь уже авторизован");
+          } else {
+            console.log("Ошибка авторизации");
+          }
+        });
+    },
+
     // Получение списка сервисов
     getServises() {
       let queryParams =
-        "?pageNum=0&pageSize=10&sortCol=id&sortDesc=false&active=true";
+        "?pageNum=0&pageSize=4&sortCol=id&sortDesc=false&active=true";
       axios
         .get(this.dynamicUrl + "serv/get-services" + queryParams)
         .then((response) => {
@@ -1900,18 +1947,20 @@ export default {
           console.groupEnd();
         });
     },
+
     // Детальная информация по сервису
     async showServiceInfo(serviceId) {
       await this.getServiceInfo(serviceId);
-      console.log(`Показ сервиса с id = ${serviceId}`);
-      this.goToView("/service-info/" + serviceId);
+      if (this.$route.params.serviceId !== serviceId) {
+        this.goToView("/service-info/" + serviceId);
+      }
     },
     async getServiceInfo(serviceId) {
       await axios
         .get(this.dynamicUrl + "serv/get-model?id=" + serviceId)
         .then((response) => {
-          this.serviceInfo = response.data;
-          this.serviceInfo.newDescription = JSON.parse(
+          this.service.info = response.data;
+          this.service.info.newDescription = JSON.parse(
             response.data.newDescription
           );
           console.groupCollapsed(
@@ -1922,9 +1971,20 @@ export default {
         });
     },
     // показать первую форму сервиса
-    showServiceFirstForm(serviceId) {
-      console.log(serviceId);
+
+    async showServiceFirstForm(serviceId) {
+      console.log(`Показать первую форму сервиса с id = ${serviceId}`);
+      Promise.all([
+        this.getServiceForms(serviceId),
+        this.getServiceForm(serviceId),
+      ]).then(() => {
+        console.log("Первая форма и формы сервиса загружены");
+      });
+      // if (this.$route.params.serviceId !== serviceId) {
+      this.goToView("/service-form/" + serviceId + "/0");
+      // }
     },
+
     // Админка
     // Чтение админки
     async getAppConfig() {
@@ -2265,64 +2325,56 @@ export default {
     },
 
     // Формы formio.js
-    async getForm(serviceId, appId) {
-      // let requestUrl;
-      // if (appId) {
-      //   requestUrl = this.dynamicUrl + "app/get-appData?id=" + appId;
-      //   if (serviceId === this.appsServiceId) {
-      //     console.log("Запрос формы существующего заявления");
-      //   } else if (serviceId === this.messagesServiceId) {
-      //     console.log("Запрос формы существующего сообщения");
-      //   } else if (serviceId === this.expertisesServiceId) {
-      //     console.log("Запрос формы существующей экспертизы");
-      //   }
-      // } else {
-      //   requestUrl =
-      //     this.dynamicUrl + "serv/get-appData?id=" + serviceId;
-      //   if (serviceId === this.appsServiceId) {
-      //     console.log("Запрос стартовой формы заявления");
-      //   } else if (serviceId === this.messagesServiceId) {
-      //     console.log("Запрос стартовой формы сообщения");
-      //   }
-      // }
-      // await axios
-      //   .get(requestUrl, {
-      //     withCredentials: true,
-      //   })
-      //   .then((response) => {
-      //     console.groupCollapsed("Стартовая форма");
-      //     console.log(response.data.applicationDTO);
-      //     console.groupEnd();
-      //     const newForm = response.data.applicationDTO;
-      //     newForm.data = JSON.parse(newForm.data);
-      //     newForm.form.scheme = JSON.parse(newForm.form.scheme);
-      //     if (serviceId === this.appsServiceId) {
-      //       this.appForm = newForm;
-      //     } else if (serviceId === this.messagesServiceId) {
-      //       this.messageForm = newForm;
-      //     } else if (serviceId === this.expertisesServiceId) {
-      //       this.expertiseForm = newForm;
-      //     }
-      //   })
-      //   .then(() => {
-      //     if (serviceId === this.appsServiceId) {
-      //       this.loaderFinish(this.appsLoader);
-      //     } else if (serviceId === this.messagesServiceId) {
-      //       this.loaderFinish(this.messagesLoader);
-      //     } else if (serviceId === this.expertisesServiceId) {
-      //       this.loaderFinish(this.expertisesLoader);
-      //     }
-      //   });
+    async getServiceForms(serviceId) {
+      await axios
+        .get(this.dynamicUrl + "serv/get-forms?id=" + serviceId)
+        .then((response) => {
+          console.groupCollapsed("Формы по мере поддержки");
+          console.log(response.data);
+          console.groupEnd();
+          this.service.forms = response.data;
+        });
+    },
+    async getServiceForm(serviceId, appId) {
       console.log(serviceId);
       console.log(appId);
-      this.appForm.loader.isLoading = true;
-      this.appForm.loader.isResponse = false;
-      setTimeout(() => {
+      // this.appForm.loader.isLoading = true;
+      // this.appForm.loader.isResponse = false;
+      let requestUrl;
+      if (appId) {
+        requestUrl = this.dynamicUrl + "app/get-appData?id=" + appId;
+        console.log("Запрос формы существующего заявления");
+      } else {
+        requestUrl = this.dynamicUrl + "serv/get-appData?id=" + serviceId;
+        console.log("Запрос стартовой формы заявления");
+      }
+      await axios
+        .get(requestUrl, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (appId) {
+            console.groupCollapsed("Не стартовая форма сервиса");
+          } else {
+            console.groupCollapsed("Стартовая форма сервиса");
+          }
+          console.log(response.data.applicationDTO);
+          console.groupEnd();
+          const newForm = response.data.applicationDTO;
+          newForm.data = JSON.parse(newForm.data);
+          newForm.form.scheme = JSON.parse(newForm.form.scheme);
+          this.appForm = newForm;
+        });
+      // .then(() => {
+      //   this.loaderFinish(this.appForm.loader);
+      // });
+
+      /*setTimeout(() => {
         this.appForm = JSON.parse(JSON.stringify(this["form" + serviceId]));
         this.appForm.loader = {};
         this.appForm.loader.isLoading = false;
         this.appForm.loader.isResponse = true;
-      }, 3000);
+      }, 3000);*/
     },
     async invokeAction(action) {
       console.log("Выполнение действия " + action.id);
@@ -2689,10 +2741,9 @@ export default {
   },
 
   mounted: async function () {
-    this.getServises();
     console.log("Смонтирован компонент App");
+    // await this.fakeSignInLocal();
+    await this.getServises();
   },
 };
 </script>
-
-<style lang="scss"></style>

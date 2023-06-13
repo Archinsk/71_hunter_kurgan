@@ -40,64 +40,28 @@
               </li>
             </ul>
 
+            <!--  Кнопки  -->
             <div class="row justify-content-md-center">
-              <div class="col-12 col-md-10 col-lg-8 col-xl-6">
-                <CollapseButton
-                  :target-id="
-                    selectedAccordionItemId === 'huntingAppCollapse' ||
-                    !selectedAccordionItemId
-                      ? 'formCollapse'
-                      : ''
-                  "
-                  class="btn-primary btn-block btn-lg"
-                  @click="
-                    selectAccordionItem('huntingAppCollapse'),
-                      $emit('get-start-form', '01')
-                  "
+              <div
+                v-for="service of services"
+                :key="service.id"
+                class="col-12 col-md-10 col-lg-8 col-xl-6 mb-2"
+              >
+                <button
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#formCollapse"
+                  aria-expanded="false"
+                  aria-controls="formCollapse"
+                  class="btn btn-collapse btn-primary btn-block btn-lg"
+                  @click="$emit('show-service-info', service.id)"
                 >
                   <div class="collapse-title">
-                    Подать заявку на добычу охотничьих ресурсов
+                    {{ service.name }}
                   </div>
-                </CollapseButton>
+                </button>
               </div>
             </div>
-            <div class="my-2 row justify-content-md-center">
-              <div class="col-12 col-md-10 col-lg-8 col-xl-6">
-                <CollapseButton
-                  :target-id="
-                    selectedAccordionItemId === 'preserveAppCollapse' ||
-                    !selectedAccordionItemId
-                      ? 'formCollapse'
-                      : ''
-                  "
-                  class="btn-primary btn-block btn-lg"
-                  @click="
-                    selectAccordionItem('preserveAppCollapse'),
-                      $emit('get-start-form', '02')
-                  "
-                >
-                  <div class="collapse-title">
-                    Подать уведомление об участии в мероприятиях по сохранению
-                    охотничьих ресурсов
-                  </div>
-                </CollapseButton>
-              </div>
-            </div>
-            <button
-              v-for="service of services"
-              :key="service.id"
-              type="button"
-              data-toggle="collapse"
-              data-target="#formCollapse"
-              aria-expanded="false"
-              aria-controls="formCollapse"
-              class="btn btn-collapse btn-primary btn-block btn-lg"
-              @click="$emit('show-service-info', service.id)"
-            >
-              <div class="collapse-title">
-                {{ service.name }}
-              </div>
-            </button>
 
             <ul class="list-unstyled pt-3 m-0">
               <li class="color-gray">
@@ -126,108 +90,7 @@
                 Подача уведомлений с 15 января по 1 февраля 2023 г.
               </h5>
             </div>
-
-            <div class="row">
-              <div
-                class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3 mt-2"
-              >
-                <CollapseButton
-                  :target-id="
-                    selectedAccordionItemId === 'checkAppCollapse' ||
-                    !selectedAccordionItemId
-                      ? 'formCollapse'
-                      : ''
-                  "
-                  class="btn-primary btn-block btn-lg"
-                  @click="
-                    selectAccordionItem('checkAppCollapse'),
-                      $emit('get-start-form', '03')
-                  "
-                >
-                  <div class="collapse-title">Узнать статус заявки</div>
-                </CollapseButton>
-              </div>
-              <div
-                class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3 my-2"
-              >
-                <CollapseButton
-                  :target-id="
-                    selectedAccordionItemId === 'checkNotificationCollapse' ||
-                    !selectedAccordionItemId
-                      ? 'formCollapse'
-                      : ''
-                  "
-                  class="btn-primary btn-block btn-lg"
-                  @click="
-                    selectAccordionItem('checkNotificationCollapse'),
-                      $emit('get-start-form', '04')
-                  "
-                >
-                  <div class="collapse-title">Проверить статус уведомления</div>
-                </CollapseButton>
-              </div>
-            </div>
           </div>
-          <!-- Содержимое аккордионов -->
-          <Card v-show="selectedAccordionItemId" class="shadow-sm my-4">
-            <template v-slot:card-body>
-              <Collapse id="formCollapse">
-                <Loader
-                  v-if="appForm.loader.isLoading && !appForm.loader.isResponse"
-                  comment="Загрузка формы"
-                />
-                <div
-                  v-show="appForm.loader.isResponse"
-                  id="application-form-04"
-                  class="row pt-2"
-                >
-                  <div class="col-12">
-                    <h4 class="text-center py-2">
-                      {{ measure.name + ": " + appForm.form.name }}
-                    </h4>
-                  </div>
-                  <div class="col-10">
-                    <Form
-                      :form="appForm.form.scheme"
-                      :submission="appForm"
-                      language="ru"
-                      :options="{
-                        readOnly: !appForm.active,
-                      }"
-                      ref="vueForm"
-                    />
-                  </div>
-                  <div
-                    v-if="
-                      appForm.form.actions && appForm.form.actions.length > 0
-                    "
-                    id="action-buttons-04"
-                    class="col-2"
-                  >
-                    <template v-for="action of appForm.form.actions">
-                      <template
-                        v-if="
-                          !action.hidden &&
-                          (appForm.active ||
-                            (action.alwaysActive && !isLastForm))
-                        "
-                      >
-                        <button
-                          :key="action.id"
-                          type="button"
-                          class="btn btn-block btn-primary"
-                          @click="$emit('form-action', action)"
-                        >
-                          {{ action.name }}
-                        </button>
-                      </template>
-                    </template>
-                    <!--          <button class="btn btn-warning" @click="hideLoaders">убрать лоадеры</button>-->
-                  </div>
-                </div>
-              </Collapse>
-            </template>
-          </Card>
         </div>
       </div>
     </div>
@@ -237,20 +100,9 @@
 
 <script>
 import TheFooter from "../components/TheFooter";
-import Collapse from "../components/universal/BS46Collapse";
-import CollapseButton from "../components/universal/BS46CollapseButton";
-import Card from "../components/universal/BS46Card";
-// import Form from "../components/universal/BS46Form";
-import Loader from "../components/universal/BS46Loader";
-import { Form } from "vue-formio";
 export default {
   name: "HomeView",
   components: {
-    Loader,
-    Form,
-    Card,
-    CollapseButton,
-    Collapse,
     TheFooter,
   },
   props: ["services", "measure", "appForm"],
@@ -272,9 +124,6 @@ export default {
 
   mounted() {
     console.log("Смонтирован HomeView");
-    console.log(this);
-    console.log(this.$refs);
-    console.log(this.$refs.vueForm);
   },
 };
 </script>
