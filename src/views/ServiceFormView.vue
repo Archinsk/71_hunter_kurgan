@@ -1,52 +1,52 @@
 <template>
   <div id="application-page" class="container">
-    <template v-if="isResponse">
-      <div id="application-form" class="row pt-2">
-        <div class="col-12">
-          <h4 class="text-center py-2">
-            {{ service.name + ": " + appForm.form.name }}
-          </h4>
-        </div>
-        <div class="col-10">
-          <Form
-            :form="appForm.form.scheme"
-            :submission="appForm"
-            language="ru"
-            :options="{
-              readOnly: !appForm.active,
-              i18n: formOptions.i18n,
-            }"
-            ref="vueForm"
-          />
-        </div>
-        <div
-          v-if="appForm.form.actions && appForm.form.actions.length > 0"
-          id="action-buttons"
-          class="col-2"
-        >
-          <template v-for="action of appForm.form.actions">
-            <template
-              v-if="
-                !action.hidden &&
-                (appForm.active || (action.alwaysActive && !isLastForm))
-              "
-            >
-              <button
-                :key="action.id"
-                type="button"
-                class="btn btn-block btn-primary"
-                @click="invokeAction(action)"
-              >
-                {{ action.name }}
-              </button>
-            </template>
-          </template>
-          <!--          <button class="btn btn-warning" @click="hideLoaders">убрать лоадеры</button>-->
-        </div>
+    <!--    <template v-if="isResponse">-->
+    <div id="application-form" class="row pt-2">
+      <div class="col-12">
+        <h4 class="text-center py-2">
+          {{ service.info.name + ": " + appForm.form.name }}
+        </h4>
       </div>
-    </template>
+      <div class="col-10">
+        <Form
+          :form="appForm.form.scheme"
+          :submission="appForm"
+          language="ru"
+          :options="{
+            readOnly: !appForm.active,
+            i18n: formOptions.i18n,
+          }"
+          ref="vueForm"
+        />
+      </div>
+      <div
+        v-if="appForm.form.actions && appForm.form.actions.length > 0"
+        id="action-buttons"
+        class="col-2"
+      >
+        <template v-for="action of appForm.form.actions">
+          <template
+            v-if="
+              !action.hidden &&
+              (appForm.active || (action.alwaysActive && !isLastForm))
+            "
+          >
+            <button
+              :key="action.id"
+              type="button"
+              class="btn btn-block btn-primary"
+              @click="invokeAction(action)"
+            >
+              {{ action.name }}
+            </button>
+          </template>
+        </template>
+        <!--          <button class="btn btn-warning" @click="hideLoaders">убрать лоадеры</button>-->
+      </div>
+    </div>
+    <!--    </template>-->
 
-    <template v-else-if="isLoading">
+    <!--<template v-else-if="isLoading">
       <div class="card pt-2">
         <div class="card-body text-center">
           <div class="spinner-border text-primary" role="status">
@@ -55,9 +55,9 @@
           <div>{{ loadingComment }}</div>
         </div>
       </div>
-    </template>
+    </template>-->
 
-    <b-modal
+    <!--<b-modal
       id="signature"
       ref="modal-signature"
       title="Подпись файла"
@@ -68,7 +68,7 @@
     >
       <label for="CertListBox">Выберите сертификат</label>
       <select name="CertListBox" id="CertListBox" class="form-control">
-        <!--        <option disabled value="-1" selected>Выберите сертификат</option>-->
+        &lt;!&ndash;        <option disabled value="-1" selected>Выберите сертификат</option>&ndash;&gt;
       </select>
       <div class="row">
         <div class="col-6" id="cryptoProStatusDiv" style="margin-top: 1rem">
@@ -153,7 +153,7 @@
           Подписать
         </b-button>
       </template>
-    </b-modal>
+    </b-modal>-->
   </div>
 </template>
 
@@ -166,20 +166,10 @@ export default {
   components: {
     Form,
   },
-  props: ["url", "user", "theme", "appForm"],
+  props: ["url", "user", "theme", "service", "appForm"],
 
   data() {
     return {
-      service: {},
-      serviceForms: [
-        {
-          actions: [],
-          id: 0,
-          modelId: 0,
-          name: "Заявление",
-          scheme: {},
-        },
-      ],
       isResponse: false,
       isLoading: false,
       isFirstLoad: true,
@@ -323,62 +313,13 @@ export default {
   computed: {
     isLastForm: function () {
       return (
-        this.serviceForms[this.serviceForms.length - 1].id ===
+        this.service.forms[this.service.forms.length - 1].id ===
         this.appForm.form.id
       );
     },
   },
 
   methods: {
-    // Формы по мере поддержки
-    getServiceForms() {
-      axios
-        .get(this.url + "serv/get-forms?id=" + this.$route.params.modelId)
-        .then((response) => {
-          console.groupCollapsed("Формы по мере поддержки");
-          console.log(response.data);
-          console.groupEnd();
-          this.serviceForms = response.data;
-        });
-    },
-
-    // Стартовая форма заявления
-    /*getStartForm(id) {
-      this.isResponse = false;
-      this.isLoading = true;
-      if (id) {
-        setTimeout(this.getForm, 500, id);
-      } else {
-        setTimeout(this.getForm, 500);
-      }
-    },
-    getForm(id) {
-      let requestUrl;
-      if (id) {
-        requestUrl = this.url + "app/get-appData?id=" + id;
-      } else {
-        requestUrl =
-          this.url + "serv/get-appData?id=" + this.$route.params.modelId;
-      }
-      axios
-        .get(requestUrl, {
-          withCredentials: true,
-        })
-        .then((response) => {
-          console.groupCollapsed("Стартовая форма");
-          console.log(response.data.applicationDTO);
-          console.groupEnd();
-          const newForm = response.data.applicationDTO;
-          newForm.data = JSON.parse(newForm.data);
-          newForm.form.scheme = JSON.parse(newForm.form.scheme);
-          this.appForm = newForm;
-        })
-        .then(() => {
-          this.isResponse = true;
-          this.isLoading = false;
-        });
-    },*/
-
     validateForm() {
       return this.$refs.vueForm.formio.checkValidity(
         this.$refs.vueForm.formio.submission.data
@@ -645,9 +586,10 @@ export default {
 
   mounted: function () {
     console.log("Смонтирован AppView");
-    let formioField = document.getElementById("formiojs");
+    // Разобраться с логами
+    /*let formioField = document.getElementById("formiojs");
     console.log(formioField);
-    /*this.loadCrypto();
+    this.loadCrypto();
     if (+this.$route.params.appId) {
       this.getStartForm(this.$route.params.appId);
     } else {
