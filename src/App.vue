@@ -8269,8 +8269,8 @@ export default {
     // Некоторые REST-запросы закрыты для неавторизованных пользователей
     async fakeSignInLocal() {
       const request = {
-        login: "mihail",
-        password: "123456",
+        login: "applicant",
+        password: "applicant",
       };
       await axios
         .post(this.dynamicUrl + "auth/local-login", request, {
@@ -8291,7 +8291,7 @@ export default {
     // Получение списка сервисов
     getServises() {
       let queryParams =
-        "?pageNum=0&pageSize=4&sortCol=id&sortDesc=false&active=true";
+        "?pageNum=0&pageSize=10&sortCol=id&sortDesc=false&active=true";
       axios
         .get(this.dynamicUrl + "serv/get-services" + queryParams)
         .then((response) => {
