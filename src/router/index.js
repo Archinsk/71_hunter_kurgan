@@ -25,6 +25,11 @@ const routes = [
     name: "ServiceFormView",
     component: () => import("../views/ServiceFormView"),
   },
+  {
+    path: "/application_view/model/:modelId/app/:appId",
+    name: "ApplicationView",
+    component: () => import("../views/ApplicationView"),
+  },
 ];
 
 const router = new VueRouter({

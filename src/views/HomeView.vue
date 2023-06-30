@@ -43,7 +43,7 @@
             <!--  Кнопки  -->
             <div class="row justify-content-md-center">
               <div
-                v-for="service of services"
+                v-for="service of services.list"
                 :key="service.id"
                 class="col-12 col-md-10 col-lg-8 mb-2"
               >
@@ -54,8 +54,9 @@
                   aria-expanded="false"
                   aria-controls="formCollapse"
                   class="btn btn-collapse btn-primary btn-block btn-lg"
-                  @click="$emit('show-service-info', service.id)"
+                  @click="$emit('show-service-first-form', service.id)"
                 >
+                  <!--                  @click="$emit('show-service-info', service.id)"-->
                   <div class="collapse-title">
                     {{ service.name }}
                   </div>

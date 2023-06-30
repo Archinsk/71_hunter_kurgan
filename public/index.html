@@ -10,7 +10,14 @@
       rel="stylesheet"
       href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css"
     />
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="flatpickr.min.css" />
+    <link rel="stylesheet" href="formio.full.min.css" />
+    <script src="flatpickr.min.js"></script>
+    <script src="formio.full.min.js"></script>
+    <link rel="stylesheet" href="floating-labels.css" />
+    <link rel="stylesheet" href="custom-styles-src.css" />
+
+    <title>Открытый контур тестового сервера newtemplate</title>
   </head>
   <body>
     <noscript>
@@ -21,8 +28,5 @@
       >
     </noscript>
     <div id="app"></div>
-    <style>
-      @import url("custom-styles-src.css");
-    </style>
   </body>
 </html>
