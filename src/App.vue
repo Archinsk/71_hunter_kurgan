@@ -10463,14 +10463,14 @@ export default {
     // Новые методы с использованием formio.js
     // Админка
     async fakeSignInLocal() {
-      // const request = {
-      //   login: "applicant",
-      //   password: "applicant",
-      // };
       const request = {
+        login: "applicant",
+        password: "applicant",
+      };
+      /*const request = {
         login: "mihail",
         password: "12345",
-      };
+      };*/
       await axios
         .post(this.dynamicUrl + "api/auth/local-login", request, {
           withCredentials: true,
