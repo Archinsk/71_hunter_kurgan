@@ -8186,7 +8186,8 @@ export default {
       config: {
         // url: "/",
         // url: "https://open-newtemplate.isands.ru/",
-        url: "https://hunter-kurganobl.isands.ru/",
+        // url: "https://hunter-kurganobl.isands.ru/",
+        url: "https://sokol2.gov45.ru/",
         esiaSignInUrl: "",
         user: {
           auth: false,
