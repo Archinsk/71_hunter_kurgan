@@ -32,6 +32,12 @@
       </div>
 
       <div class="col-10" :style="isLoading ? 'opacity:0' : 'opacity:1'">
+        <vb-alert
+          v-if="service.applicationDTO?.data?.errorText"
+          theme-color="danger"
+          >{{ service.applicationDTO.data.errorText }}</vb-alert
+        >
+        <div id="application-error"></div>
         <div id="formio" ref="vueForm"></div>
       </div>
       <div
@@ -168,9 +174,11 @@
 <script>
 /*import { Form } from "vue-formio";*/
 import axios from "axios";
+import VbAlert from "../components/universal/BS46Alert";
 
 export default {
   name: "ApplicationView",
+  components: { VbAlert },
   /*components: {
     Form,
   },*/
